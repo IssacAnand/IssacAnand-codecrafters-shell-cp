@@ -13,13 +13,18 @@ int main() {
 
   // TODO: Uncomment the code below to pass the first stage
 string command;
-while (true){
+bool condition; // bool is built-in condition in c++
+condition = true;
+while (condition){
     cout << "$ ";
     std::getline(cin,command);
+    if(command == "exit"){
+      condition = false;
+    }
     cout << command << ": command not found" <<endl;
   }
   
 
-  
+return 0; // The program finished successfully
   
 }
