@@ -21,8 +21,8 @@ while (condition){
     if(command == "exit"){
       condition = false;
     }
-    else if(command.substr(0,4 )== "echo"){
-      string argument = command.erase(0,4);
+    else if(command.substr(0,4)== "echo"){ // removes the space as well
+      string argument = command.erase(0,5);
       cout << argument <<endl;
     }
     else{
