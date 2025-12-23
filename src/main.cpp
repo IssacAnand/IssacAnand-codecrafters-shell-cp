@@ -21,6 +21,10 @@ while (condition){
     if(command == "exit"){
       condition = false;
     }
+    else if(command.substr(0,4 )== "echo"){
+      string argument = command.erase(0,4);
+      cout << argument <<endl;
+    }
     else{
     cout << command << ": command not found" <<endl;
     }
