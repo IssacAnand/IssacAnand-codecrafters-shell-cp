@@ -21,7 +21,9 @@ while (condition){
     if(command == "exit"){
       condition = false;
     }
+    else{
     cout << command << ": command not found" <<endl;
+    }
   }
   
 
