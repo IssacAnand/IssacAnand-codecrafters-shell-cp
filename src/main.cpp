@@ -33,7 +33,6 @@ string check_path(string full_path, string argument) {
       }
         string target_file = directory + '/' + argument;
         if(fs::exists(target_file)){
-        cout << argument << " is " << target_file <<endl;
         return target_file;
         }
   }
