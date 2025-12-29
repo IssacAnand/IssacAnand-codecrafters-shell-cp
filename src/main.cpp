@@ -12,7 +12,7 @@ namespace fs =std::filesystem;
 
 
 
-bool check_path(string full_path, string argument) {
+string check_path(string full_path, string argument) {
   // check functionality
   bool condition{true};
 
@@ -34,18 +34,18 @@ bool check_path(string full_path, string argument) {
         string target_file = full_path + '/' + argument;
         if(fs::exists(target_file)){
         cout << argument << " is " << target_file <<endl;
-        return true;
+        return target_file;
         }
   }
- return false;
+ return "";
 }
 
 
-bool is_in_builtin(string cmd){
+string is_in_builtin(string cmd){
 std::vector<string> BUILT_IN_TYPES = {"echo", "exit", "type"}; // basic arrays dont have methods, so need to loop through manually
 for(string b: BUILT_IN_TYPES){
   if(cmd == b){
-    return true;
+    return cmd;
   }
 } // ADD THE PATH Functionality here
   char* raw_path =  std::getenv("PATH");
@@ -53,9 +53,7 @@ for(string b: BUILT_IN_TYPES){
   if (raw_path != nullptr) {
     string current_path = raw_path;
     return check_path(current_path, cmd); //return true or false
-  
   }
-  
 }
 
 int main() {
@@ -79,8 +77,9 @@ while (condition){
 
     else if(command.substr(0,4)=="type"){
       string argument = command.erase(0,5);
-      if (is_in_builtin(argument)){
-        cout << argument << " is a shell builtin"<<endl;
+      string result = is_in_builtin(argument);
+      if (result != ""){
+        cout << argument << " is " << result<<endl;
       }
       else{
         cout << argument << ": not found"<<endl;
