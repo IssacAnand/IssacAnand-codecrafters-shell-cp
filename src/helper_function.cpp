@@ -1,9 +1,10 @@
 #include "helper_function.h"
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <cstdlib> //collection of general-purpose functions that C++ inherited from the original C language
-#include <filesystem>// In C++, std::filesystem is a library (introduced in C++17) that gives your program the ab
+#include <filesystem>// In C++, std::filesystem is a library (introduced in C++17) that gives program the ability to "talk" to your computer's operating system about files and folders
 
 using std::string;
 using std::cout;
@@ -62,7 +63,22 @@ for(string b: BUILT_IN_TYPES){
   // cout << raw_path;
   if (raw_path != nullptr) {
     string current_path = raw_path;
-    return check_path(current_path, cmd); //return true or false
-
+    return check_path(current_path, cmd); //return string type
   }
+}
+
+string check_external_program(string full_path, string argument){
+    // need to split the argument into program and subsequent commands
+    std::stringstream ss(argument);
+    std::vector<string> args; // dynamic array containing all the chars
+    string single_argument;
+    //loop through argument
+    while(ss>> single_argument){
+        args.push_back(single_argument);
+    }
+    string program = args[0]; // the first argument
+
+    string program_path = check_path(full_path,program); // check if there is executable
+    return program_path;
+
 }

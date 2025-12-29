@@ -50,10 +50,12 @@ while (condition){
     else{
         string result;
         char* raw_path =  std::getenv("PATH");
+        cout<< command<<endl;
         // cout << raw_path;
         if (raw_path != nullptr) {
           string current_path = raw_path;
-          result = check_path(current_path, command);
+
+          result = check_external_program(current_path, command); // stores the program path
           }
         if (result != ""){
           int num_of_args = command.length();
