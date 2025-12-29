@@ -31,7 +31,7 @@ string check_path(string full_path, string argument) {
         directory= full_path;
         full_path.clear();
       }
-        string target_file = full_path + '/' + argument;
+        string target_file = directory + '/' + argument;
         if(fs::exists(target_file)){
         cout << argument << " is " << target_file <<endl;
         return target_file;
@@ -53,6 +53,7 @@ for(string b: BUILT_IN_TYPES){
   if (raw_path != nullptr) {
     string current_path = raw_path;
     return check_path(current_path, cmd); //return true or false
+
   }
 }
 
@@ -79,7 +80,7 @@ while (condition){
       string argument = command.erase(0,5);
       string result = is_in_builtin(argument);
       if (result != ""){
-        cout << argument << " is " << "usr" + '/' + result<<endl;
+        cout << argument << " is " << result<<endl;
       }
       else{
         cout << argument << ": not found"<<endl;
