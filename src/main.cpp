@@ -51,7 +51,7 @@ while (condition){
     else{
         string result;
         char* raw_path =  std::getenv("PATH");
-        cout<< command<<endl;
+        // cout<< command<<endl;
         // cout << raw_path;
         if (raw_path != nullptr) {
           string current_path = raw_path;
@@ -70,7 +70,7 @@ while (condition){
 
         if (result != ""){
           int num_of_args = args.size();
-          cout << "Program was passed " << num_of_args << " args (including program name)" <<endl;
+          cout << "Program was passed " << num_of_args << " args (including program name)." <<endl;
         }
         else{
           cout << command << ": command not found" <<endl;
