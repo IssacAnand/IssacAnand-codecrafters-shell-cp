@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <cstdlib> //collection of general-purpose functions that C++ inherited from the original C language
+#include <sstream>
 
 using std::string;
 using std::cout;
@@ -55,10 +56,20 @@ while (condition){
         if (raw_path != nullptr) {
           string current_path = raw_path;
 
+
           result = check_external_program(current_path, command); // stores the program path
           }
+          // get the dynamic array here
+            std::stringstream ss(command);
+            std::vector<string> args; // dynamic array containing all the chars
+            string single_argument;
+            //loop through argument
+            while(ss>> single_argument){
+                args.push_back(single_argument);
+            }
+
         if (result != ""){
-          int num_of_args = command.length();
+          int num_of_args = args.size();
           cout << "Program was passed " << num_of_args << " args (including program name)" <<endl;
         }
         else{
