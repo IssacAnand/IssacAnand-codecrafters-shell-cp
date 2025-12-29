@@ -15,7 +15,6 @@ bool check_path(string full_path, string argument) {
   bool condition{true};
 
   while(!full_path.empty()){
-    cout << "Full Path is : "<< full_path<<endl;
     // break the string and test here
     size_t colon_pos = full_path.find(':');
 
