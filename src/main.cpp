@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdlib> //collection of general-purpose functions that C++ inherited from the original C language
 #include <sstream>
+#include <functional> // Required for std::hash
 
 using std::string;
 using std::cout;
@@ -63,6 +64,8 @@ while (condition){
             std::stringstream ss(command);
             std::vector<string> args; // dynamic array containing all the chars
             string single_argument;
+            std::hash<std::string> hasher;
+            size_t signature = hasher(command);
             //loop through argument
             while(ss>> single_argument){
                 args.push_back(single_argument);
@@ -82,6 +85,7 @@ while (condition){
             counter++;
             
           }
+          cout<<"Program Signature: " <<signature<<endl; //getting the hash value?
         }
         else{
           cout << command << ": command not found" <<endl;
