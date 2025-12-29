@@ -71,6 +71,17 @@ while (condition){
         if (result != ""){
           int num_of_args = args.size();
           cout << "Program was passed " << num_of_args << " args (including program name)." <<endl;
+          int counter= 0;
+          while(counter < num_of_args){
+            if (counter == 0){
+              cout <<"Arg #0 (progran name): " <<args[0] <<endl;
+            }
+            else{
+              cout <<"Arg #"<< counter <<": "<<args[counter]<<endl;
+            }
+            counter++;
+            
+          }
         }
         else{
           cout << command << ": command not found" <<endl;
