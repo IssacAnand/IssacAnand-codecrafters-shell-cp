@@ -10,6 +10,18 @@ using std::endl;
 using std::cin;
 namespace fs =std::filesystem;
 
+bool is_executable(const std::string& path) {
+    try {
+        fs::perms p = fs::status(path).permissions();
+        
+        // Check if any execution bit is set (Owner, Group, or Others)
+        return ((p & fs::perms::owner_exec) != fs::perms::none ||
+                (p & fs::perms::group_exec) != fs::perms::none ||
+                (p & fs::perms::others_exec) != fs::perms::none);
+    } catch (const fs::filesystem_error& e) {
+        return false; // Path doesn't exist or isn't accessible
+    }
+}
 
 
 string check_path(string full_path, string argument) {
@@ -32,7 +44,7 @@ string check_path(string full_path, string argument) {
         full_path.clear();
       }
         string target_file = directory + '/' + argument;
-        if(fs::exists(target_file)){
+        if(fs::exists(target_file) && is_executable(target_file)){
         return target_file;
         }
   }
