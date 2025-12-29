@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include <cstdlib> //collection of general-purpose functions that C++ inherited from the original C language
-#include <filesystem>// In C++, std::filesystem is a library (introduced in C++17) that gives your program the ability to "talk" to your computer's operating system about files and folders
 
 using std::string;
 using std::cout;
@@ -49,8 +48,20 @@ while (condition){
     }
 
     else{
-    cout << command << ": command not found" <<endl;
-    }
+        string result;
+        char* raw_path =  std::getenv("PATH");
+        // cout << raw_path;
+        if (raw_path != nullptr) {
+          string current_path = raw_path;
+          result = check_path(current_path, command);
+          }
+        if (result != ""){
+          int num_of_args = command.length();
+          cout << "Program was passed " << num_of_args << " args (including program name)" <<endl;
+        }
+        else{
+          cout << command << ": command not found" <<endl;
+        }
   }
   
 
