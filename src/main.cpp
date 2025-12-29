@@ -79,7 +79,7 @@ while (condition){
       string argument = command.erase(0,5);
       string result = is_in_builtin(argument);
       if (result != ""){
-        cout << argument << " is " << result<<endl;
+        cout << argument << " is " << "usr" + '/' + result<<endl;
       }
       else{
         cout << argument << ": not found"<<endl;
