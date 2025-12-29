@@ -74,7 +74,7 @@ while (condition){
           int counter= 0;
           while(counter < num_of_args){
             if (counter == 0){
-              cout <<"Arg #0 (progran name): " <<args[0] <<endl;
+              cout <<"Arg #0 (program name): " <<args[0] <<endl;
             }
             else{
               cout <<"Arg #"<< counter <<": "<<args[counter]<<endl;
