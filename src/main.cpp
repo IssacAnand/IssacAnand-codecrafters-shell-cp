@@ -90,7 +90,10 @@ while (condition){
     else if(command.substr(0,4)=="type"){
       string argument = command.erase(0,5);
       string result = is_in_builtin(argument);
-      if (result != ""){
+      if ( result =="echo"|| result == "exit"){
+        cout << result << " is a shell builtin"<<endl;
+      }
+      else if (result != ""){
         cout << argument << " is " << result<<endl;
       }
       else{
