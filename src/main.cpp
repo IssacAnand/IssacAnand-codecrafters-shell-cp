@@ -1,11 +1,48 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cstdlib> //collection of general-purpose functions that C++ inherited from the original C language
+#include <filesystem>// In C++, std::filesystem is a library (introduced in C++17) that gives your program the ability to "talk" to your computer's operating system about files and folders
 
 using std::string;
 using std::cout;
 using std::endl;
 using std::cin;
+namespace fs =std::filesystem;
+// shd return string instead
+bool check_path(string full_path, string argument) {
+  // check functionality
+  bool condition{true};
+
+  while(!full_path.empty()){
+    cout << "Full Path is : "<< full_path<<endl;
+    // break the string and test here
+    size_t colon_pos = full_path.find(':');
+
+    if(colon_pos != string::npos){ //npos is a way of saying not found, since cant return 0 as 0 is an index
+      string directory = full_path.substr(0,colon_pos);
+      string target_file = directory + '/' + argument;
+      if(fs::exists(target_file)){
+        cout << argument << " is " << target_file<<endl;
+        return true;
+
+      }
+      else{
+        //check the last path
+        string last_target_file = full_path + '/' + argument;
+        if(fs::exists(last_target_file)){
+        cout << argument << " is " << target_file<<endl;
+        return true;
+        }
+       
+      }
+    }
+      // To break the loop
+      full_path.clear();
+  }
+ return false;
+}
+
 
 bool is_in_builtin(string cmd){
 std::vector<string> BUILT_IN_TYPES = {"echo", "exit", "type"}; // basic arrays dont have methods, so need to loop through manually
@@ -13,7 +50,14 @@ for(string b: BUILT_IN_TYPES){
   if(cmd == b){
     return true;
   }
-}
+} // ADD THE PATH Functionality here
+  char* raw_path =  std::getenv("PATH");
+  // cout << raw_path;
+  if (raw_path != nullptr) {
+    string current_path = raw_path;
+    check_path(current_path, cmd);
+  
+  }
   return false;
 }
 
@@ -25,13 +69,13 @@ int main() {
   // TODO: Uncomment the code below to pass the first stage
 string command;
 
-bool condition; // bool is built-in condition in c++
-condition = true;
+bool condition{true}; // bool is built-in condition in c++
+
 
 
 while (condition){
     cout << "$ ";
-    std::getline(cin,command);
+    std::getline(cin,command); // getline() is a function that reads a whole chunk of text until it hits a specific "stop sign."
     if(command == "exit"){
       condition = false;
     }
